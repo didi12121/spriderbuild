@@ -23,15 +23,10 @@ public class run {
 			for (Weibo weibo : list) {
 				if (weibo.isIsvideo()) {
 					System.out.println("准备开始下载");
-					if (useThunder) {//调用迅雷下载，传入ThunderStart.exe的路径
-						downloadWithThunder.start("D:/Program Files (x86)/Thunder Network/Thunder/Program/ThunderStart.exe",
-								spider.getViedoUrl(weibo.getItemid()));
-					}else {
-						try {
+					try {
 							spider.downloadVideoByUrl(weibo.getItemid());
-						}catch (Exception e){
+					}catch (Exception e){
 							continue;
-						}
 					}
 				}else {
 					try {
