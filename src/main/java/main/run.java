@@ -4,8 +4,7 @@ import java.io.IOException;
 import java.net.SocketTimeoutException;
 import java.util.List;
 
-import dowmload.downloadWithThunder;
-import spider.spider;
+import spider.Spider;
 import weibo.Weibo;
 
 public class run {
@@ -16,7 +15,7 @@ public class run {
 		String itemId = "";
 		String uid = "";
 		System.out.println("开始下载--");
-		spider spider = new spider(Cookie, itemId, uid);
+		Spider spider = new Spider(Cookie, itemId, uid);
 		int max =spider.getPicPageMaxPage();
 		for (int i = 1; i <= max; i++) {
 			List<Weibo> list=spider.getuserAllweiboid(i);
