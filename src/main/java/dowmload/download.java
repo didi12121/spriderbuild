@@ -58,7 +58,6 @@ public class download {
 			InputStream inStream = connection.getInputStream();
 			// 得到图片的二进制数据，以二进制封装得到数据，具有通用性
 			byte[] data;
-			try {
 				data = readInputStream(inStream);
 				FileInit(patch);
 				// new一个文件对象用来保存图片，保存在path
@@ -73,18 +72,13 @@ public class download {
 				// 关闭输出流
 				outStream.close();
 				System.out.println("下载完成，文件位于" + imageFile.getPath());
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
 		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
-		}
+		} catch (Exception e) {
+				e.printStackTrace();
+			}
 
 	}
 
@@ -124,13 +118,10 @@ public class download {
 			outStream.close();
 			System.out.println("下载完成，文件位于" + imageFile.getPath());
 		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -145,10 +136,4 @@ public class download {
 		}
 	}
 
-	public static void main(String[] args) {
-		// http://f.video.weibocdn.com/003lnNR7lx07xJK9ML7O0104120bkIXX0E040.mp4?label=mp4_hd&template=640x360.25.0&trans_finger=62b30a3f061b162e421008955c73f536&Expires=1571039959&ssig=lM%2BSTDSQZQ&KID=unistore,video
-		download.getvideo(
-				"http://f.video.weibocdn.com/003lnNR7lx07xJK9ML7O0104120bkIXX0E040.mp4?label=mp4_hd&template=640x360.25.0&trans_finger=62b30a3f061b162e421008955c73f536&Expires=1571039959&ssig=lM%2BSTDSQZQ&KID=unistore,video",
-				"C:\\weibo\\a.mp4");
-	}
 }

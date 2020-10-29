@@ -90,7 +90,7 @@ public class spider {
 				id=element.attr("id");
 				id=id.substring(id.indexOf("_")+1);
 				ctt=element.getElementsByClass("ctt").text().toString();
-				Weibo wb=new Weibo(id, ctt);
+				Weibo wb = Weibo.builder().itemid(id).content(ctt).build();
 				mList.add(wb);
 				//System.out.println(element.getElementsByClass("ctt").text().toString()+id);
 				//System.out.println(id);
@@ -125,7 +125,7 @@ public class spider {
 				id=element.attr("id");
 				id=id.substring(id.indexOf("_")+1);
 				ctt=element.getElementsByClass("ctt").text().toString();
-				Weibo wb=new Weibo(id, ctt);
+				Weibo wb = Weibo.builder().itemid(id).content(ctt).build();
 				if (ctt.indexOf("的微博视频")>0) {
 					id=element.getElementsMatchingText("的微博视频").attr("href").toString();
 					wb.setIsvideo(true);

@@ -1,26 +1,19 @@
 package weibo;
 
+import lombok.Builder;
+import lombok.Data;
+
+@Data
+@Builder
 public class Weibo {
-	public void setItemid(String itemid) {
-		this.itemid = itemid;
-	}
-	String itemid=null;
-	String content=null;
+	String itemid;
+
+	String content;
+
 	boolean isvideo=false;
+
 	public boolean isIsvideo() {
 		return isvideo;
 	}
-	public Weibo(String itemid,String content) {
-		this.itemid=itemid;
-		this.content=content;
-	}
-	public void setIsvideo(boolean isvideo) {
-		this.isvideo = isvideo;
-	}
-	public String getItemid() {
-		return itemid;
-	}
-	public String getContent() {
-		return content;
-	}
+	
 }
