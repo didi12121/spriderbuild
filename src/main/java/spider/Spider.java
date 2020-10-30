@@ -20,12 +20,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 
-public class spider {
+public class Spider {
 	String Cookie = null;// cookie
 	String itemId = null;// 微博的id
 	String uid = null;// 博主的uid
 
-	public spider(String Cookie, String itemId, String uid) {
+	public Spider(String Cookie, String itemId, String uid) {
 		this.Cookie = Cookie;
 		this.itemId = itemId;
 		this.uid = uid;
