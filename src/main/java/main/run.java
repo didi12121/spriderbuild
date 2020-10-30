@@ -11,10 +11,9 @@ import weibo.Weibo;
 public class run {
 
 	public static void main(String[] args) throws InterruptedException, IOException {
-		boolean useThunder=false;//是否使用迅雷下载
-		String Cookie = "";
 		String itemId = "";
-		String uid = "";
+		String Cookie = "";
+		String uid = "1927305954";
 		System.out.println("开始下载--");
 		spider spider = new spider(Cookie, itemId, uid);
 		int max =spider.getPicPageMaxPage();
@@ -33,12 +32,12 @@ public class run {
 						spider.getpicurl(weibo.getItemid(),weibo.getContent());
 					} catch (NullPointerException e) {
 						continue;
-					} catch(SocketTimeoutException e){
-						continue;
 					}
 				}
 			}	
 			System.out.println("第"+i+"页ok,剩余"+(max-i)+"页");
+			System.out.println("休息一分钟");
+			Thread.sleep(1000*60);
 		}
 	}
 

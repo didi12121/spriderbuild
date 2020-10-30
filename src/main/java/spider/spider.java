@@ -143,9 +143,10 @@ public class spider {
 	/**
 	 * 传入的微博id获得原图链接
 	 * */
-	public void getpicurl(String id,String title) throws IOException {
+	public void getpicurl(String id,String title) {
 		String url="https://weibo.cn/mblog/picAll/"+id+"?rl=1";
-		Document doc=null;
+		try {
+			Document doc = null;
 			doc = Jsoup.connect(url).header("Accept", "*/*").header("Accept-Encoding", "gzip, deflate")
 					.header("Accept-Language", "zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3")
 					.header("Content-Type", "application/json;charset=UTF-8")
@@ -153,29 +154,35 @@ public class spider {
 					.header("Cookie", Cookie).ignoreContentType(true).data().timeout(10000).get();
 			Elements elements = doc.getElementsByTag("a");
 			for (Element element : elements) {
-				String hrefString=element.attr("href").toString();
+				String hrefString = element.attr("href").toString();
 				if (hrefString.startsWith("/mblog/oripic?")) {
-					String urlString="https://weibo.cn"+hrefString;
-							downlopic(urlString, title);
+					String urlString = "https://weibo.cn" + hrefString;
+					downlopic(urlString, title);
 				}
 			}
+		}catch (Exception e){
+			e.printStackTrace();
+			System.out.println(url);
+//			getpicurl(id, title);
+		}
 	}
 	public int getPicPageMaxPage() {
-		String url="https://weibo.cn/u/"+uid+"?filter=2&page=1";
+		String url="https://weibo.cn/u/"+uid;
 		Document doc=null;
+		int maxmun = 0;
 			try {
 				doc = Jsoup.connect(url).header("Accept", "*/*").header("Accept-Encoding", "gzip, deflate")
 						.header("Accept-Language", "zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3")
 						.header("Content-Type", "application/json;charset=UTF-8")
 						.header("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:48.0) Gecko/20100101 Firefox/48.0")
 						.header("Cookie", Cookie).ignoreContentType(true).data().timeout(10000).get();
+				String numString=doc.getElementsMatchingOwnText("1/").text().toString();
+				numString=numString.substring(numString.indexOf("1/")+2,numString.indexOf("页",3));
+				maxmun=Integer.parseInt(numString);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			String numString=doc.getElementsMatchingOwnText("1/").text().toString();
-			numString=numString.substring(numString.indexOf("1/")+2,numString.indexOf("页",3));
-			int maxmun=Integer.parseInt(numString);
-			return maxmun;
+		return maxmun;
 	}
 	private void downlopic(String urlString,String title) {
 		if (title.length()>10) {
@@ -193,7 +200,6 @@ public class spider {
 			 connection.setRequestProperty("Cookie", Cookie);
 			 connection.connect();
 			 Map<String, List<String>> map = connection.getHeaderFields();
-//			 System.out.println(map.get("Location").get(0).toString());
 			 new Thread(new downloadUserPic(map.get("Location").get(0), "D:/weibo/"+uid+"/img",title)).start();
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
